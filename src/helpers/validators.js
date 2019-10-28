@@ -85,10 +85,17 @@ export const validateFieldN5 = allPass([
 ]);
 
 // 6. Длина > 5, или одна из цифр равна "7"
-export const validateFieldN6 = () => false;
+export const validateFieldN6 = anyPass([
+  lengthMoreThan(5),
+  includes(7),
+]);
 
 // 7. Длина > 8 и кол-во цифр > 3 шт. и только англ
-export const validateFieldN7 = () => false;
+export const validateFieldN7 = allPass([
+  lengthMoreThan(8),
+  numberCountMoreThan(3),
+  containsOnlyEng
+])
 
 // 8. Кол-во цифр < 5 шт. или только англ или одна из цифр равна "7"
 export const validateFieldN8 = () => false;
