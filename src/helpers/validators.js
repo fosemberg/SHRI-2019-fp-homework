@@ -74,7 +74,7 @@ export const validateFieldN3 = anyPass([
 export const validateFieldN4 = allPass([
   lengthLessThan(10),
   numberCountMoreThan(2),
-  includes(4)
+  includes(4),
 ]);
 
 // 5. Длина < 10 и кол-во цифр > 1 шт. и ни одна из цифр не равна "4"
@@ -94,14 +94,26 @@ export const validateFieldN6 = anyPass([
 export const validateFieldN7 = allPass([
   lengthMoreThan(8),
   numberCountMoreThan(3),
-  containsOnlyEng
+  containsOnlyEng,
 ])
 
 // 8. Кол-во цифр < 5 шт. или только англ или одна из цифр равна "7"
-export const validateFieldN8 = () => false;
+export const validateFieldN8 = anyPass([
+  numberCountLessThan(5),
+  containsOnlyEng,
+  includes(7),
+])
 
 // 9. Длина < 8, кол-во цифр > 4 шт. только англ
-export const validateFieldN9 = () => false;
+export const validateFieldN9 = allPass([
+  lengthLessThan(8),
+  numberCountMoreThan(4),
+  containsOnlyEng,
+])
 
 // 10. Длина < 4 или кол-во цифр > 2 шт. или только англ
-export const validateFieldN10 = () => false;
+export const validateFieldN10 = anyPass([
+  lengthLessThan(4),
+  numberCountMoreThan(2),
+  containsOnlyEng,
+])
