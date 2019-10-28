@@ -19,7 +19,7 @@
  * const lengthGreaterThenOne = x => x.length > 1;
  */
 
-import {replace, length, compose, test, pipe, allPass, curry} from 'ramda';
+import {replace, length, compose, test, pipe, allPass, anyPass, curry} from 'ramda';
 
 const replaceNumbers = replace(/[^0-9]/g, '');
 
@@ -40,30 +40,37 @@ const containsOnlyEng = test(/^[a-zA-Z0-9.+]+$/);
  * Функции для проверки наличия конкретного символа в строке
  */
 
-const lessThan = curry((number, el) => el < number)
-const moreThan = curry((number, el) => el > number)
+const lessThan = curry((number, el) => el < number);
+const moreThan = curry((number, el) => el > number);
 
-const lessThanFive = lessThan(5);
-const lessThanTwo = lessThan(2);
-const moreThanTwo = moreThan(2);
+const lengthLessThan = number => pipe(length, lessThan(number));
+const lengthMoreThan = number => pipe(length, moreThan(number));
+
+const numberCountLessThan = number => pipe(getNumbersCount, lessThan(number));
+const numberCountMoreThan = number => pipe(getNumbersCount, moreThan(number));
 
 // 1. Длина < 5 и кол-во цифр > 2 шт.
 export const validateFieldN1 = allPass([
-  pipe(length, lessThanFive),
-  pipe(getNumbersCount, moreThanTwo)
+  lengthLessThan(5),
+  numberCountMoreThan(2),
 ]);
 
 // 2. Длина < 5 и кол-во цифр < 2 шт.
 export const validateFieldN2 = allPass([
-  pipe(length, lessThanFive),
-  pipe(getNumbersCount, lessThanTwo)
+  lengthLessThan(5),
+  numberCountLessThan(2),
 ])
 
 // 3. Длина > 5 или кол-во цифр > 1 шт.
-export const validateFieldN3 = () => false;
+export const validateFieldN3 = anyPass([
+  lengthMoreThan(5),
+  numberCountMoreThan(1),
+]);
 
 // 4. Длина < 10 и кол-во цифр > 2 шт. и одна из цифр равна "4"
-export const validateFieldN4 = () => false;
+export const validateFieldN4 = allPass([
+
+]);
 
 // 5. Длина < 10 и кол-во цифр > 1 шт. и ни одна из цифр не равна "4"
 export const validateFieldN5 = () => false;
