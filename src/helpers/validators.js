@@ -1,4 +1,4 @@
-/* 
+/*
  * Основная задача — написать самому, или найти в FP библиотеках функции anyPass/allPass
  * Эти функции/их аналоги есть и в ramda и в lodash
  *
@@ -19,7 +19,7 @@
  * const lengthGreaterThenOne = x => x.length > 1;
  */
 
-import {replace, length, compose, test} from 'ramda';
+import {replace, length, compose, test, pipe, allPass, curry} from 'ramda';
 
 const replaceNumbers = replace(/[^0-9]/g, '');
 
@@ -40,12 +40,24 @@ const containsOnlyEng = test(/^[a-zA-Z0-9.+]+$/);
  * Функции для проверки наличия конкретного символа в строке
  */
 
+const lessThan = curry((number, el) => el < number)
+const moreThan = curry((number, el) => el > number)
+
+const lessThanFive = lessThan(5);
+const lessThanTwo = lessThan(2);
+const moreThanTwo = moreThan(2);
 
 // 1. Длина < 5 и кол-во цифр > 2 шт.
-export const validateFieldN1 = () => false;
+export const validateFieldN1 = allPass([
+  pipe(length, lessThanFive),
+  pipe(getNumbersCount, moreThanTwo)
+]);
 
 // 2. Длина < 5 и кол-во цифр < 2 шт.
-export const validateFieldN2 = () => false;
+export const validateFieldN2 = allPass([
+  pipe(length, lessThanFive),
+  pipe(getNumbersCount, lessThanTwo)
+])
 
 // 3. Длина > 5 или кол-во цифр > 1 шт.
 export const validateFieldN3 = () => false;
