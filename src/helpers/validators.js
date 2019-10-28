@@ -19,7 +19,7 @@
  * const lengthGreaterThenOne = x => x.length > 1;
  */
 
-import {replace, length, compose, test, pipe, allPass, anyPass, curry} from 'ramda';
+import {replace, length, compose, test, pipe, allPass, anyPass, curry, not} from 'ramda';
 
 const replaceNumbers = replace(/[^0-9]/g, '');
 
@@ -49,6 +49,9 @@ const lengthMoreThan = number => pipe(length, moreThan(number));
 const numberCountLessThan = number => pipe(getNumbersCount, lessThan(number));
 const numberCountMoreThan = number => pipe(getNumbersCount, moreThan(number));
 
+const includes = curry((substring, string) => string.includes(substring))
+const notIncludes = substring => pipe(includes(substring), not);
+
 // 1. Длина < 5 и кол-во цифр > 2 шт.
 export const validateFieldN1 = allPass([
   lengthLessThan(5),
@@ -69,11 +72,17 @@ export const validateFieldN3 = anyPass([
 
 // 4. Длина < 10 и кол-во цифр > 2 шт. и одна из цифр равна "4"
 export const validateFieldN4 = allPass([
-
+  lengthLessThan(10),
+  numberCountMoreThan(2),
+  includes(4)
 ]);
 
 // 5. Длина < 10 и кол-во цифр > 1 шт. и ни одна из цифр не равна "4"
-export const validateFieldN5 = () => false;
+export const validateFieldN5 = allPass([
+  lengthLessThan(10),
+  numberCountMoreThan(1),
+  notIncludes(4)
+]);
 
 // 6. Длина > 5, или одна из цифр равна "7"
 export const validateFieldN6 = () => false;
