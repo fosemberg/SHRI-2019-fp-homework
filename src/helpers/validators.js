@@ -27,27 +27,26 @@ const getNumbersCount = compose(length, replaceNumbers);
 
 const containsOnlyEng = test(/^[a-zA-Z0-9.+]+$/);
 
+const lessThan = curry((number, el) => el < number);
+const moreThan = curry((number, el) => el > number);
 
 /**
  * Функции для проверки выполнения условий с количеством цифр в строке
  */
 
+const numberCountLessThan = number => pipe(getNumbersCount, lessThan(number));
+const numberCountMoreThan = number => pipe(getNumbersCount, moreThan(number));
+
 /**
  * Функции для проверки выполнения условий с длиной строки
  */
 
-/**
- * Функции для проверки наличия конкретного символа в строке
- */
-
-const lessThan = curry((number, el) => el < number);
-const moreThan = curry((number, el) => el > number);
-
 const lengthLessThan = number => pipe(length, lessThan(number));
 const lengthMoreThan = number => pipe(length, moreThan(number));
 
-const numberCountLessThan = number => pipe(getNumbersCount, lessThan(number));
-const numberCountMoreThan = number => pipe(getNumbersCount, moreThan(number));
+/**
+ * Функции для проверки наличия конкретного символа в строке
+ */
 
 const includes = curry((substring, string) => string.includes(substring))
 const notIncludes = substring => pipe(includes(substring), not);
