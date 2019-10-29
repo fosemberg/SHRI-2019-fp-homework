@@ -1,4 +1,4 @@
-import {prop, cond, pipe, equals} from 'ramda';
+import {prop, cond, pipe, equals, applySpec} from 'ramda';
 
 import {SHAPES} from '../constants';
 
@@ -43,7 +43,7 @@ const shapeEqualsSphere = shapeEquals(SHAPES.SPHERE);
 const shapeEqualsTetrahedron = shapeEquals(SHAPES.TETRAHEDRON);
 
 const calcVolumeWithFormula = formula => pipe(
-  propHeight,
+  propSize,
   formula,
 );
 
@@ -58,8 +58,7 @@ const calcVolume = cond([
 ]);
 
 const calcMass = pipe(
-    () => {},
-    //
+  () => {},
 );
 
 const calcVelocity = pipe(
@@ -67,13 +66,20 @@ const calcVelocity = pipe(
     //
 );
 
+const propVolume = prop('volume');
+
 const computeMomentum = pipe(
+  applySpec({
+    volume: calcVolume,
+    height: propHeight,
+    density: propDensity,
+  }),
     // calcVolume(propSize(props), propShape(props)),
     // () => {console.log('Height:', propHeight(props))},
     // () => {console.log('Size:', propSize(props))},
     // () => {console.log('Shape:', propShape(props))},
     // () => {console.log('Density:', propDensity(props))},
-    calcVolume,
+  propVolume,
 );
 
 
