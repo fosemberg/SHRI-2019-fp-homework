@@ -48,7 +48,7 @@ const lengthMoreThan = number => pipe(length, moreThan(number));
  * Функции для проверки наличия конкретного символа в строке
  */
 
-const includes = curry((substring, string) => string.includes(substring))
+const includes = curry((substring, string) => string.includes(substring));
 const notIncludes = substring => pipe(includes(substring), not);
 
 // 1. Длина < 5 и кол-во цифр > 2 шт.
@@ -61,7 +61,7 @@ export const validateFieldN1 = allPass([
 export const validateFieldN2 = allPass([
   lengthLessThan(5),
   numberCountLessThan(2),
-])
+]);
 
 // 3. Длина > 5 или кол-во цифр > 1 шт.
 export const validateFieldN3 = anyPass([
@@ -94,25 +94,25 @@ export const validateFieldN7 = allPass([
   lengthMoreThan(8),
   numberCountMoreThan(3),
   containsOnlyEng,
-])
+]);
 
 // 8. Кол-во цифр < 5 шт. или только англ или одна из цифр равна "7"
 export const validateFieldN8 = anyPass([
   numberCountLessThan(5),
   containsOnlyEng,
   includes(7),
-])
+]);
 
 // 9. Длина < 8, кол-во цифр > 4 шт. только англ
 export const validateFieldN9 = allPass([
   lengthLessThan(8),
   numberCountMoreThan(4),
   containsOnlyEng,
-])
+]);
 
 // 10. Длина < 4 или кол-во цифр > 2 шт. или только англ
 export const validateFieldN10 = anyPass([
   lengthLessThan(4),
   numberCountMoreThan(2),
   containsOnlyEng,
-])
+]);
