@@ -14,8 +14,6 @@ const propShape = prop('shape');
 const propHeight = prop('height');
 const propDensity = prop('density');
 const propSize = prop('size');
-const propVolume = prop('volume');
-const propMass = prop('mass');
 
 /**
  * Промежуточные формулы для рассчета указанные в задании
