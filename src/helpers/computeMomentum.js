@@ -14,7 +14,8 @@ const propShape = prop('shape');
 const propHeight = prop('height');
 const propDensity = prop('density');
 const propSize = prop('size');
-
+const propVolume = prop('volume');
+const propMass = prop('mass');
 
 /**
  * Промежуточные формулы для рассчета указанные в задании
@@ -58,15 +59,13 @@ const calcVolume = cond([
 ]);
 
 const calcMass = pipe(
-  () => {},
+  massFormula
 );
 
 const calcVelocity = pipe(
-    () => {},
-    //
+    propHeight,
+    velocityFormula
 );
-
-const propVolume = prop('volume');
 
 const computeMomentum = pipe(
   applySpec({
@@ -74,13 +73,12 @@ const computeMomentum = pipe(
     height: propHeight,
     density: propDensity,
   }),
-    // calcVolume(propSize(props), propShape(props)),
-    // () => {console.log('Height:', propHeight(props))},
-    // () => {console.log('Size:', propSize(props))},
-    // () => {console.log('Shape:', propShape(props))},
-    // () => {console.log('Density:', propDensity(props))},
-  propVolume,
+  applySpec({
+    mass: calcMass,
+    velocity: calcVelocity,
+  }),
+  momentumFormula,
+  round,
 );
-
 
 export default computeMomentum;
