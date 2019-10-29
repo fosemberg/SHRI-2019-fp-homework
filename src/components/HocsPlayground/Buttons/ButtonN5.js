@@ -20,7 +20,7 @@ const withRotateOnCounterChange = (deg = 30) =>
           width: 'fit-content'
         }}
       >
-        <BaseComponent{...props} style={{background: 'black'}}>
+        <BaseComponent{...props}>
           {props.children}
         </BaseComponent>
       </div>
