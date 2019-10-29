@@ -6,41 +6,17 @@ import BaseButton from './BaseButton';
 import withOnClickDecreaseCounter from "../hocs/withOnClickDecreaseCounter";
 import withCounter from "../hocs/withCounter";
 import withShowCounter from "../hocs/withShowCounter";
-import withSize from "../hocs/withSize";
 import withSmallSize from "../hocs/withSmallSize";
 import withDefaultColor from "../hocs/withDefaultColor";
-
-const withResetCounterOnZero = withHandlers({
-  onClick: ({
-              reset, counter, onClick = () => {
-    }
-            }) => () => {
-    onClick();
-    counter === 1 && reset();
-  },
-});
-
-const withSetColorOnCounter = (color = 'orange', counter = 1) =>
-  withHandlers({
-    onClick: ({
-                setOuterColor, setInnerColor, counter: currentCounter, onClick = () => {
-      }
-              }) => () => {
-      onClick();
-      const setColor = color => {
-        setInnerColor(color);
-        setOuterColor(color);
-      }
-      currentCounter === counter && setColor(color);
-    },
-  });
+import withResetCounterOnNumber from "../hocs/withResetCounterOnNumber";
+import withSetColorOnNumber from "../hocs/withSetColorOnNumber";
 
 export default compose(
   withSmallSize,
   withDefaultColor,
   withCounter(5),
   withOnClickDecreaseCounter,
-  withResetCounterOnZero,
-  withSetColorOnCounter(),
+  withResetCounterOnNumber(1),
+  withSetColorOnNumber(),
   withShowCounter('top'),
 )(BaseButton)
