@@ -1,4 +1,4 @@
 import withSize from "./withSize";
 
 
-export default withSize( "medium");
+export default withSize( "small");

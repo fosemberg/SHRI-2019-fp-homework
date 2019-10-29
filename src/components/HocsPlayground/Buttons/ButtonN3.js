@@ -7,6 +7,8 @@ import BaseButton from './BaseButton';
 import withPrimaryColor from "../hocs/withPrimaryColor";
 import withOnClickIncreaseCounter from "../hocs/withOnClickIncreaseCounter";
 import withCounter from "../hocs/withCounter";
+import withShowCounter from "../hocs/withShowCounter";
+import withSmallSize from "../hocs/withSmallSize";
 
 const isOdd = number => number % 2 === 0;
 
@@ -23,18 +25,11 @@ const withOnClickToggleColor = withHandlers({
   },
 });
 
-const withShowCounterOnLeft =
-  (BaseComponent) =>
-    props => <BaseComponent {...props}>
-      {props.counter}
-      {' '}
-      {props.children}
-    </BaseComponent>
-
 export default compose(
+  withSmallSize,
   withPrimaryColor,
-  withCounter,
+  withCounter(),
   withOnClickIncreaseCounter,
   withOnClickToggleColor,
-  withShowCounterOnLeft,
+  withShowCounter(),
 )(BaseButton)
