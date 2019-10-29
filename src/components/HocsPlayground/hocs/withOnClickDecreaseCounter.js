@@ -1,4 +1,4 @@
-import {withHandlers, withStateHandlers} from 'recompose';
+import {withHandlers} from 'recompose';
 import React from "react";
 
 export default withHandlers({

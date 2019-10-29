@@ -18,7 +18,7 @@ const withOnClickToggleColor = withHandlers({
     const setColor = color => {
       setInnerColor(color);
       setOuterColor(color);
-    }
+    };
     isOdd(counter)
       ? setColor('green')
       : setColor('gray');

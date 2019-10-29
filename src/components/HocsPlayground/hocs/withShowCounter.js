@@ -1,4 +1,3 @@
-import {withHandlers, withState, compose} from 'recompose';
 import React from "react";
 
 export default (side = 'left') =>
@@ -6,8 +5,8 @@ export default (side = 'left') =>
     props => <BaseComponent {...props}>
       {
         side === 'left' ? <span>{props.counter + ' '}</span>
-        : side === 'top' ? <div>{props.counter}</div>
-        : null
+          : side === 'top' ? <div>{props.counter}</div>
+          : null
       }
       {props.children}
     </BaseComponent>

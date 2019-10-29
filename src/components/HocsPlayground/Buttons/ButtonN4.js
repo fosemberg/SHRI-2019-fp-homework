@@ -1,7 +1,7 @@
 /**
  * Необходимо имплементировать компонент и его логику путем композиции хоков и stateless компонента BaseButton
  */
-import {compose, withHandlers} from 'recompose';
+import {compose} from 'recompose';
 import BaseButton from './BaseButton';
 import withOnClickDecreaseCounter from "../hocs/withOnClickDecreaseCounter";
 import withCounter from "../hocs/withCounter";

@@ -35,7 +35,7 @@ const colors = [
   'gray',
   'black',
   'yellow',
-]
+];
 
 const getRandomFromArray = (items) => items[Math.floor(Math.random() * items.length)];
 
